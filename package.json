@@ -1,7 +1,7 @@
 {
-  "name": "library-js",
+  "name": "books-api",
   "version": "1.0.0",
-  "description": "simple library written in js",
+  "description": "Simple books API with all tests included",
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
