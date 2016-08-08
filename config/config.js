@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   database: process.env.DATABASE || 'library',
   username:'',
   password: '',
