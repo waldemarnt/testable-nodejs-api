@@ -1,4 +1,4 @@
-export default function(sequelize, DataType) {
+export default (sequelize, DataType) => {
   const Books = sequelize.define('Books', {
     id: {
       type: DataType.INTEGER,

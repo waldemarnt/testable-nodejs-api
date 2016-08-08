@@ -1,7 +1,7 @@
 import HttpStatus from 'http-status';
 import BooksController from '../controllers/books';
 
-export default function(app) {
+export default (app) => {
   const booksController = new BooksController(app.datasource.models.Books);
   app.route('/books')
     .get((req, res) => {
