@@ -1,3 +1,5 @@
+import HttpStatus from 'http-status';
+
 describe('Routes: Books', () => {
   const Books = app.datasource.models.Books,
   defaultBook = {
@@ -100,7 +102,7 @@ describe('Routes: Books', () => {
       request
         .delete('/books/1')
         .end((err, res) => {
-          expect(res.statusCode).to.eql(204);
+          expect(res.statusCode).to.eql(HttpStatus.NO_CONTENT);
           done(err);
         });
     });
