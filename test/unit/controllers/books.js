@@ -2,7 +2,7 @@ import BooksController from '../../../controllers/books';
 
 describe('Controllers: Books', () => {
   describe('Get all books: getAll()', () => {
-    it('should return a list of books', done => {
+    it('should return a list of books', () => {
       const Books = {
         findAll: td.function()
       },
@@ -16,14 +16,13 @@ describe('Controllers: Books', () => {
       td.when(Books.findAll({})).thenResolve(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.getAll()
+      return booksController.getAll()
         .then((response) => {
-          expect(response).to.be.eql(expectedResponse);
-          done();
+          return expect(response).to.be.eql(expectedResponse);
         });
     });
 
-    it('should throw error', done => {
+    it('should throw error', () => {
       const Books = {
         findAll: td.function()
       },
@@ -36,16 +35,15 @@ describe('Controllers: Books', () => {
       td.when(Books.findAll({})).thenReject(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.getAll()
+      return booksController.getAll()
         .catch((error) => {
-          expect(error).to.be.eql(expectedResponse);
-          done();
+          return expect(error).to.be.eql(expectedResponse);
         });
     });
   });
 
   describe('Get one book: getById()', () => {
-    it('should return one book', done => {
+    it('should return one book', () => {
       const Books = {
         findOne: td.function()
       },
@@ -56,18 +54,16 @@ describe('Controllers: Books', () => {
         updated_at: '2016-08-06T23:55:36.692Z'
       }];
 
-
       td.when(Books.findOne({where:{id: 1}})).thenResolve(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.getById({id: 1})
+      return booksController.getById({id: 1})
         .then((response) => {
-          expect(response).to.be.eql(expectedResponse);
-          done();
+          return expect(response).to.be.eql(expectedResponse);
         });
     });
 
-    it('should throw error', done => {
+    it('should throw error', () => {
       const Books = {
         findOne: td.function()
       },
@@ -80,16 +76,15 @@ describe('Controllers: Books', () => {
       td.when(Books.findOne({where:{}})).thenReject(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.getById({})
+      return booksController.getById({})
         .catch((error) => {
-          expect(error).to.be.eql(expectedResponse);
-          done();
+          return expect(error).to.be.eql(expectedResponse);
         });
     });
   });
 
   describe('Create a book: create()', () => {
-    it('should create a book', done => {
+    it('should create a book', () => {
       const Books = {
         create: td.function()
       },
@@ -106,14 +101,13 @@ describe('Controllers: Books', () => {
       td.when(Books.create(requestBody)).thenResolve(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.create(requestBody)
+      return booksController.create(requestBody)
         .then((response) => {
-          expect(response).to.be.eql(expectedResponse);
-          done();
+          return expect(response).to.be.eql(expectedResponse);
         });
     });
 
-    it('should throw error', done => {
+    it('should throw error', () => {
       const Books = {
         create: td.function()
       },
@@ -126,16 +120,15 @@ describe('Controllers: Books', () => {
       td.when(Books.create({})).thenReject(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.create({})
+      return booksController.create({})
         .catch((error) => {
-          expect(error).to.be.eql(expectedResponse);
-          done();
+          return expect(error).to.be.eql(expectedResponse);
         });
     });
   });
 
   describe('Create a book: update()', () => {
-    it('should update an existing book', done => {
+    it('should update an existing book', () => {
       const Books = {
         update: td.function()
       },
@@ -153,14 +146,13 @@ describe('Controllers: Books', () => {
       td.when(Books.update(requestBody, {where: {id: 1}})).thenResolve(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.update(requestBody, {id: 1})
+      return booksController.update(requestBody, {id: 1})
         .then((response) => {
-          expect(response).to.be.eql(expectedResponse);
-          done();
+          return expect(response).to.be.eql(expectedResponse);
         });
     });
 
-    it('should throw error', done => {
+    it('should throw error', () => {
       const Books = {
         update: td.function()
       },
@@ -173,16 +165,15 @@ describe('Controllers: Books', () => {
       td.when(Books.update({}, {where: {}})).thenReject(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.update({}, {})
+      return booksController.update({}, {})
         .catch((error) => {
-          expect(error).to.be.eql(expectedResponse);
-          done();
+          return expect(error).to.be.eql(expectedResponse);
         });
     });
   });
 
   describe('Delete a book: delete()', () => {
-    it('should delete an existing book', done => {
+    it('should delete an existing book', () => {
       const Books = {
         destroy: td.function()
       },
@@ -191,14 +182,13 @@ describe('Controllers: Books', () => {
       td.when(Books.destroy({where: {id: 1}})).thenResolve(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.delete({id: 1})
+      return booksController.delete({id: 1})
         .then((response) => {
-          expect(response).to.be.eql(expectedResponse);
-          done();
+          return expect(response).to.be.eql(expectedResponse);
         });
     });
 
-    it('should throw error', done => {
+    it('should throw error', () => {
       const Books = {
         destroy: td.function()
       },
@@ -211,10 +201,9 @@ describe('Controllers: Books', () => {
       td.when(Books.destroy({where: {}})).thenReject(expectedResponse);
 
       const booksController = new BooksController(Books);
-      booksController.delete({})
+      return booksController.delete({})
         .catch((error) => {
-          expect(error).to.be.eql(expectedResponse);
-          done();
+          return expect(error).to.be.eql(expectedResponse);
         });
     });
   });
