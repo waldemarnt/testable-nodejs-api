@@ -14,7 +14,6 @@
   "author": "Waldemar Neto <waldemarnt@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "consumer-contracts": "^1.4.0",
     "eslint": "^3.2.2",
     "eslint-plugin-standard": "^2.0.0",
     "joi": "^9.0.4",
