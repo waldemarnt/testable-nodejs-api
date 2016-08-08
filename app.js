@@ -12,4 +12,4 @@ app.set('port', 3000);
 app.use(bodyParser.json());
 booksRouter(app);
 
-module.exports = app;
+export default app;

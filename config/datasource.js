@@ -4,7 +4,7 @@ import path from 'path';
 
 let database = null;
 
-module.exports = app => {
+export default function(app) {
   if(!database) {
     const config = app.config;
     const sequelize = new Sequelize(
@@ -31,4 +31,3 @@ module.exports = app => {
   }
   return database;
 };
-

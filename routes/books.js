@@ -1,6 +1,6 @@
 import BooksController from '../controllers/books';
 
-module.exports = (app) => {
+export default function(app) {
   const booksController = new BooksController(app.datasource.models.Books);
   app.route('/books')
     .get((req, res) => {
