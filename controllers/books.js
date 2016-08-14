@@ -10,7 +10,7 @@ class BooksController {
 
   getById(params) {
     return this.Books.findOne({
-      where: params
+      where: params,
     })
     .then(result => result);
   }
@@ -22,14 +22,14 @@ class BooksController {
 
   update(data, params) {
     return this.Books.update(data, {
-        where: params
-      })
+      where: params,
+    })
       .then(result => result);
   }
 
   delete(params) {
     return this.Books.destroy({
-      where: params
+      where: params,
     })
     .then(result => result);
   }

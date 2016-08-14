@@ -1,15 +1,15 @@
 import HttpStatus from 'http-status';
 
 describe('Routes: Books', () => {
-  const Books = app.datasource.models.Books,
-  defaultBook = {
+  const Books = app.datasource.models.Books;
+  const defaultBook = {
     id: 1,
-    name: 'Test Book'
+    name: 'Test Book',
   };
 
   beforeEach(done => {
     Books
-      .destroy({where:{}})
+      .destroy({ where: {} })
       .then(() => Books.create(defaultBook))
       .then(() => {
         done();
@@ -18,7 +18,6 @@ describe('Routes: Books', () => {
 
   describe('GET /books', () => {
     it('should return a list of books', done => {
-
       request
         .get('/books')
         .end((err, res) => {
@@ -31,7 +30,6 @@ describe('Routes: Books', () => {
 
   describe('GET /books/{id}', () => {
     it('should return a book by id', done => {
-
       request
         .get('/books/1')
         .end((err, res) => {
@@ -46,7 +44,7 @@ describe('Routes: Books', () => {
     it('should post a book', done => {
       const book = {
         id: 2,
-        name: "Book Created"
+        name: 'Book Created',
       };
 
       request
@@ -64,7 +62,7 @@ describe('Routes: Books', () => {
     it('should update a book', done => {
       const book = {
         id: 1,
-        name: "Book Updated"
+        name: 'Book Updated',
       };
 
       request

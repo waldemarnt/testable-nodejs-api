@@ -9,13 +9,17 @@
     "test-integration": "DATABASE=test mocha --opts test/integration/mocha.opts test/integration/*.js",
     "test-unit": "NODE_ENV=test mocha --opts test/unit/mocha.opts test/unit/**/*.js",
     "test-contract": "DATABASE=test mocha --opts test/contract/mocha.opts test/contract/contracts/*.js",
-    "lint": "eslint '**/*.js'"
+    "lint": "eslint '**/*.js' --fix"
   },
   "author": "Waldemar Neto <waldemarnt@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.2.2",
+    "eslint": "^3.3.0",
+    "eslint-config-airbnb": "^10.0.1",
+    "eslint-plugin-import": "^1.13.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-react": "^6.1.0",
     "eslint-plugin-standard": "^2.0.0",
     "joi": "^9.0.4",
     "joi-assert": "0.0.3",

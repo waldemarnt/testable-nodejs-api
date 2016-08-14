@@ -8,37 +8,37 @@ export default (app) => {
       booksController.getAll()
         .then(response => res.json(response))
         .catch(error => res.status(HttpStatus.PRECONDITION_FAILED).json({
-          msg: error.message
+          msg: error.message,
         }));
     })
     .post((req, res) => {
       booksController.create(req.body)
         .then(response => res.json(response))
         .catch(error => res.status(HttpStatus.PRECONDITION_FAILED).json({
-          msg: error.message
+          msg: error.message,
         }));
     });
 
-   app.route('/books/:id')
+  app.route('/books/:id')
      .get((req, res) => {
        booksController.getById(req.params)
          .then(response => res.json(response))
          .catch(error => res.status(HttpStatus.PRECONDITION_FAILED).json({
-           msg: error.message
+           msg: error.message,
          }));
      })
    .put((req, res) => {
      booksController.update(req.body, req.params)
        .then(response => res.json(response))
        .catch(error => res.status(HttpStatus.PRECONDITION_FAILED).json({
-         msg: error.message
+         msg: error.message,
        }));
    })
    .delete((req, res) => {
      booksController.delete(req.params)
-       .then(response => res.sendStatus(204))
+       .then(() => res.sendStatus(204))
        .catch(error => res.status(HttpStatus.PRECONDITION_FAILED).json({
-         msg: error.message
+         msg: error.message,
        }));
    });
 };
