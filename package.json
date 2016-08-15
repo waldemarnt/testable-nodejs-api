@@ -9,7 +9,8 @@
     "test-integration": "DATABASE=test mocha --opts test/integration/mocha.opts test/integration/*.js",
     "test-unit": "NODE_ENV=test mocha --opts test/unit/mocha.opts test/unit/**/*.js",
     "test-contract": "DATABASE=test mocha --opts test/contract/mocha.opts test/contract/contracts/*.js",
-    "lint": "eslint '**/*.js'"
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "eslint '**/*.js' --fix"
   },
   "author": "Waldemar Neto <waldemarnt@gmail.com>",
   "license": "ISC",

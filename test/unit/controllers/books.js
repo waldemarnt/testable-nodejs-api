@@ -18,24 +18,7 @@ describe('Controllers: Books', () => {
 
       const booksController = new BooksController(Books);
       return booksController.getAll()
-        .then(response => expect(response).to.be.eql(expectedResponse));
-    });
-
-    it('should throw error', () => {
-      const Books = {
-        findAll: td.function(),
-      };
-      const expectedResponse = {
-        error: {
-          message: 'Error',
-        },
-      };
-
-      td.when(Books.findAll({})).thenReject(expectedResponse);
-
-      const booksController = new BooksController(Books);
-      return booksController.getAll()
-        .catch(error => expect(error).to.be.eql(expectedResponse));
+        .then(response => expect(response.data).to.be.eql(expectedResponse));
     });
   });
 
@@ -56,25 +39,7 @@ describe('Controllers: Books', () => {
 
       const booksController = new BooksController(Books);
       return booksController.getById({ id: 1 })
-        .then(response => expect(response).to.be.eql(expectedResponse));
-    });
-
-    it('should throw error', () => {
-      const Books = {
-        findOne: td.function(),
-      };
-
-      const expectedResponse = {
-        error: {
-          message: 'Error',
-        },
-      };
-
-      td.when(Books.findOne({ where: {} })).thenReject(expectedResponse);
-
-      const booksController = new BooksController(Books);
-      return booksController.getById({})
-        .catch(error => expect(error).to.be.eql(expectedResponse));
+        .then(response => expect(response.data).to.be.eql(expectedResponse));
     });
   });
 
@@ -99,25 +64,10 @@ describe('Controllers: Books', () => {
 
       const booksController = new BooksController(Books);
       return booksController.create(requestBody)
-        .then(response => expect(response).to.be.eql(expectedResponse));
-    });
-
-    it('should throw error', () => {
-      const Books = {
-        create: td.function(),
-      };
-
-      const expectedResponse = {
-        error: {
-          message: 'Error',
-        },
-      };
-
-      td.when(Books.create({})).thenReject(expectedResponse);
-
-      const booksController = new BooksController(Books);
-      return booksController.create({})
-        .catch(error => expect(error).to.be.eql(expectedResponse));
+        .then(response => {
+          expect(response.data).to.be.eql(expectedResponse);
+          expect(response.statusCode).to.be.eql(201);
+        });
     });
   });
 
@@ -141,24 +91,7 @@ describe('Controllers: Books', () => {
 
       const booksController = new BooksController(Books);
       return booksController.update(requestBody, { id: 1 })
-        .then((response) => expect(response).to.be.eql(expectedResponse));
-    });
-
-    it('should throw error', () => {
-      const Books = {
-        update: td.function(),
-      };
-      const expectedResponse = {
-        error: {
-          message: 'Error',
-        },
-      };
-
-      td.when(Books.update({}, { where: {} })).thenReject(expectedResponse);
-
-      const booksController = new BooksController(Books);
-      return booksController.update({}, {})
-        .catch(error => expect(error).to.be.eql(expectedResponse));
+        .then((response) => expect(response.data).to.be.eql(expectedResponse));
     });
   });
 
@@ -173,24 +106,7 @@ describe('Controllers: Books', () => {
 
       const booksController = new BooksController(Books);
       return booksController.delete({ id: 1 })
-        .then(response => expect(response).to.be.eql(expectedResponse));
-    });
-
-    it('should throw error', () => {
-      const Books = {
-        destroy: td.function(),
-      };
-      const expectedResponse = {
-        error: {
-          message: 'Error',
-        },
-      };
-
-      td.when(Books.destroy({ where: {} })).thenReject(expectedResponse);
-
-      const booksController = new BooksController(Books);
-      return booksController.delete({})
-        .catch((error) => expect(error).to.be.eql(expectedResponse));
+        .then(response => expect(response.statusCode).to.be.eql(204));
     });
   });
 });
