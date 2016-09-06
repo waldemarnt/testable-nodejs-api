@@ -1,3 +1,4 @@
+import HttpStatus from 'http-status';
 import jwt from 'jwt-simple';
 
 export default app => {
@@ -18,12 +19,12 @@ export default app => {
             token: jwt.encode(payload, config.jwtSecret),
           });
         } else {
-          res.sendStatus(401);
+          res.sendStatus(HttpStatus.UNAUTHORIZED);
         }
       })
-      .catch(() => res.sendStatus(401));
+      .catch(() => res.sendStatus(HttpStatus.UNAUTHORIZED));
     } else {
-      res.sendStatus(401);
+      res.sendStatus(HttpStatus.UNAUTHORIZED);
     }
   });
 };
