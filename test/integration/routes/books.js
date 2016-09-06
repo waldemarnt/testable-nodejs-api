@@ -33,45 +33,33 @@ describe('Routes: Books', () => {
   });
 
   describe('GET /books', () => {
-    it('should validate a list of books', done => {
+    it('should return a list of books', done => {
       request
       .get('/books')
       .set('Authorization', `JWT ${token}`)
       .end((err, res) => {
-        const booksList = Joi.array().items(Joi.object().keys({
-          id: Joi.number(),
-          name: Joi.string(),
-          created_at: Joi.date().iso(),
-          updated_at: Joi.date().iso(),
-        }));
-
-        joiAssert(res.body, booksList);
+        expect(res.body[0].name).to.eql(defaultBook.name);
+        expect(res.body[0].id).to.eql(defaultBook.id);
         done(err);
       });
     });
   });
 
   describe('GET /books/{id}', () => {
-    it('should validate a single book schema', done => {
+    it('should return a book by id', done => {
       request
       .get('/books/1')
       .set('Authorization', `JWT ${token}`)
       .end((err, res) => {
-        const booksList = Joi.object().keys({
-          id: Joi.number(),
-          name: Joi.string(),
-          created_at: Joi.date().iso(),
-          updated_at: Joi.date().iso(),
-        });
-
-        joiAssert(res.body, booksList);
+        expect(res.body.name).to.eql(defaultBook.name);
+        expect(res.body.id).to.eql(defaultBook.id);
         done(err);
       });
     });
   });
 
   describe('POST /books', () => {
-    it('should validate a new book schema', done => {
+    it('should post a book', done => {
       const book = {
         id: 2,
         name: 'Book Created',
@@ -82,21 +70,15 @@ describe('Routes: Books', () => {
       .set('Authorization', `JWT ${token}`)
       .send(book)
       .end((err, res) => {
-        const createdBook = Joi.object().keys({
-          id: Joi.number(),
-          name: Joi.string(),
-          created_at: Joi.date().iso(),
-          updated_at: Joi.date().iso(),
-        });
-
-        joiAssert(res.body, createdBook);
+        expect(res.body.name).to.eql(book.name);
+        expect(res.body.id).to.eql(book.id);
         done(err);
       });
     });
   });
 
   describe('PUT /books/{id}', () => {
-    it('should validate a update book', done => {
+    it('should update a book', done => {
       const book = {
         id: 1,
         name: 'Book Updated',
@@ -107,16 +89,14 @@ describe('Routes: Books', () => {
       .set('Authorization', `JWT ${token}`)
       .send(book)
       .end((err, res) => {
-        const updatedCount = Joi.array().items(1);
-
-        joiAssert(res.body, updatedCount);
+        expect(res.body).to.eql([1]);
         done(err);
       });
     });
   });
 
   describe('DELETE /books/{id}', () => {
-    it('should validate a deleted book', done => {
+    it('should delete a book', done => {
       request
       .delete('/books/1')
       .set('Authorization', `JWT ${token}`)
