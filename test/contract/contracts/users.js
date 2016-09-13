@@ -1,14 +1,15 @@
 import HttpStatus from 'http-status';
 import jwt from 'jwt-simple';
 
-describe('Routes: Books', () => {
-  const Books = app.datasource.models.Books;
+describe('Routes: Users', () => {
   const Users = app.datasource.models.Users;
   const jwtSecret = app.config.jwtSecret;
 
-  const defaultBook = {
+  const defaultUser = {
     id: 1,
-    name: 'Test Book',
+    name: 'Test User',
+    email: 'test@mail.com',
+    password: 'testPassword',
   };
 
   let token;
@@ -22,9 +23,7 @@ describe('Routes: Books', () => {
       password: '12345',
     }))
     .then(user => {
-      Books
-      .destroy({ where: {} })
-      .then(() => Books.create(defaultBook))
+      Users.create(defaultUser)
       .then(() => {
         token = jwt.encode({ id: user.id }, jwtSecret);
         done();
@@ -32,59 +31,67 @@ describe('Routes: Books', () => {
     });
   });
 
-  describe('GET /books', () => {
-    it('should validate a list of books', done => {
+  describe('GET /users', () => {
+    it('should validate a list of users', done => {
       request
-      .get('/books')
+      .get('/users')
       .set('Authorization', `JWT ${token}`)
       .end((err, res) => {
-        const booksList = Joi.array().items(Joi.object().keys({
+        const usersList = Joi.array().items(Joi.object().keys({
           id: Joi.number(),
           name: Joi.string(),
+          email: Joi.string(),
+          password: Joi.string(),
           created_at: Joi.date().iso(),
           updated_at: Joi.date().iso(),
         }));
 
-        joiAssert(res.body, booksList);
+        joiAssert(res.body, usersList);
         done(err);
       });
     });
   });
 
-  describe('GET /books/{id}', () => {
-    it('should validate a single book schema', done => {
+  describe('GET /users/{id}', () => {
+    it('should validate a single user schema', done => {
       request
-      .get('/books/1')
+      .get('/users/1')
       .set('Authorization', `JWT ${token}`)
       .end((err, res) => {
-        const booksList = Joi.object().keys({
+        const usersList = Joi.object().keys({
           id: Joi.number(),
           name: Joi.string(),
+          email: Joi.string(),
+          password: Joi.string(),
           created_at: Joi.date().iso(),
           updated_at: Joi.date().iso(),
         });
 
-        joiAssert(res.body, booksList);
+        joiAssert(res.body, usersList);
         done(err);
       });
     });
   });
 
-  describe('POST /books', () => {
-    it('should validate a new book schema', done => {
-      const book = {
+  describe('POST /users', () => {
+    it('should validate a new user schema', done => {
+      const user = {
         id: 2,
-        name: 'Book Created',
+        name: 'User Created',
+        email: 'test@mail.com',
+        password: 'test',
       };
 
       request
-      .post('/books')
+      .post('/users')
       .set('Authorization', `JWT ${token}`)
-      .send(book)
+      .send(user)
       .end((err, res) => {
         const createdBook = Joi.object().keys({
           id: Joi.number(),
           name: Joi.string(),
+          email: Joi.string(),
+          password: Joi.string(),
           created_at: Joi.date().iso(),
           updated_at: Joi.date().iso(),
         });
@@ -95,17 +102,19 @@ describe('Routes: Books', () => {
     });
   });
 
-  describe('PUT /books/{id}', () => {
-    it('should validate a update book', done => {
-      const book = {
+  describe('PUT /users/{id}', () => {
+    it('should validate a update user', done => {
+      const user = {
         id: 1,
-        name: 'Book Updated',
+        name: 'User Created',
+        email: 'test@mail.com',
+        password: 'test',
       };
 
       request
-      .put('/books/1')
+      .put('/users/1')
       .set('Authorization', `JWT ${token}`)
-      .send(book)
+      .send(user)
       .end((err, res) => {
         const updatedCount = Joi.array().items(1);
 
@@ -115,10 +124,10 @@ describe('Routes: Books', () => {
     });
   });
 
-  describe('DELETE /books/{id}', () => {
-    it('should validate a deleted book', done => {
+  describe('DELETE /users/{id}', () => {
+    it('should validate a deleted user', done => {
       request
-      .delete('/books/1')
+      .delete('/users/1')
       .set('Authorization', `JWT ${token}`)
       .end((err, res) => {
         expect(res.statusCode).to.eql(HttpStatus.NO_CONTENT);
