@@ -103,7 +103,7 @@ describe('Routes: Users', () => {
   });
 
   describe('PUT /users/{id}', () => {
-    it('should validate a update user', done => {
+    it('should validate a updated user', done => {
       const user = {
         id: 1,
         name: 'User Created',
