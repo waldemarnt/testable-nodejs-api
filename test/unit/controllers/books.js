@@ -71,7 +71,7 @@ describe('Controllers: Books', () => {
     });
   });
 
-  describe('Create a book: update()', () => {
+  describe('Update a book: update()', () => {
     it('should update an existing book', () => {
       const Books = {
         update: td.function(),

@@ -71,7 +71,7 @@ describe('Controllers: Users', () => {
     });
   });
 
-  describe('Create a user: update()', () => {
+  describe('Update a user: update()', () => {
     it('should update an existing user', () => {
       const Users = {
         update: td.function(),

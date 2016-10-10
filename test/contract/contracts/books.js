@@ -96,7 +96,7 @@ describe('Routes: Books', () => {
   });
 
   describe('PUT /books/{id}', () => {
-    it('should validate a update book', done => {
+    it('should validate a updated book', done => {
       const book = {
         id: 1,
         name: 'Book Updated',
